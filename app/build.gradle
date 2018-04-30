@@ -71,4 +71,6 @@ dependencies {
     annotationProcessor "com.github.bumptech.glide:compiler:$glideVersion"
     //picasso
     implementation 'com.squareup.picasso:picasso:2.71828'
+
+    implementation 'com.github.louisgeek:ClassicDialogView:1.0.0'
 }
