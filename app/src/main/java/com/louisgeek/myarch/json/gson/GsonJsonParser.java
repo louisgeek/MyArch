@@ -1,18 +1,27 @@
 package com.louisgeek.myarch.json.gson;
 
+import com.google.gson.Gson;
 import com.louisgeek.myarch.json.BaseJson;
+import com.louisgeek.myarch.json.IBaseJsonParser;
 import com.louisgeek.myarch.json.IJsonParser;
 
-public class GsonJsonParser implements IJsonParser {
-    private MyGson mMyGson = new MyGson();
+import java.lang.reflect.Type;
 
+
+public class GsonJsonParser implements IJsonParser {
+    private Gson mGson = new Gson();
     @Override
     public String toJson(Object src) {
-        return mMyGson.toJson(src);
+        return mGson.toJson(src);
     }
 
     @Override
-    public <T> BaseJson fromJson(String json, Class<T> tClass) {
-        return mMyGson.fromJson(json, tClass);
+    public <T> T fromJson(String json, Class<T> classOfT) {
+        return mGson.fromJson(json, classOfT);
+    }
+
+    @Override
+    public <T> T fromJson(String json, Type typeOfT) {
+        return mGson.fromJson(json, typeOfT);
     }
 }

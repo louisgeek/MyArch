@@ -2,7 +2,7 @@ package com.louisgeek.myarch.data;
 
 import android.arch.lifecycle.LiveData;
 
-import com.louisgeek.myarch.MoiveTop250;
+import com.louisgeek.myarch.model.bean.Top250Bean;
 
 public class DataRepository {
     private DataRepository(){
@@ -16,7 +16,7 @@ public class DataRepository {
 
     private LocalDataSouce localDataSouce;
     private RemoteDataSouce remoteDataSouce;
-    public LiveData<MoiveTop250> getTop250List() {
+    public LiveData<Top250Bean> getTop250List() {
         if (false) {
             return remoteDataSouce.getTop250List();
         }

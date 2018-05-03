@@ -21,6 +21,7 @@ android {
 dependencies {
     def supportLibraryVersion = rootProject.supportLibraryVersion
     def retrofitVersion = '2.4.0'
+    def okhttpVersion = '3.10.0'
     def glideVersion = '4.7.1'
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
@@ -63,9 +64,12 @@ dependencies {
     implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
     implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofitVersion"
     //okhttp3
-    implementation 'com.squareup.okhttp3:okhttp:3.10.0'
+    implementation "com.squareup.okhttp3:okhttp:$okhttpVersion"
+    implementation "com.squareup.okhttp3:logging-interceptor:$okhttpVersion"
     //gson
     implementation 'com.google.code.gson:gson:2.8.3'
+    //fastjson-android
+    implementation 'com.alibaba:fastjson:1.1.68.android'
     //glide
     implementation "com.github.bumptech.glide:glide:$glideVersion"
     annotationProcessor "com.github.bumptech.glide:compiler:$glideVersion"
