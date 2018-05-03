@@ -1,7 +1,6 @@
 package com.louisgeek.myarch.json;
 
 
-import com.louisgeek.myarch.json.fastjson.FastJsonParser;
 import com.louisgeek.myarch.json.gson.GsonJsonParser;
 
 public class JsonParserFactory {
@@ -11,14 +10,14 @@ public class JsonParserFactory {
 
     private static class Inner {
         private static IJsonParser sInstance = new GsonJsonParser();
-        private static IJsonParser sInstance_FastJson = new FastJsonParser();
+//        private static IJsonParser sInstance_FastJson = new FastJsonParser();
     }
 
     public static IJsonParser getGson() {
         return Inner.sInstance;
     }
 
-    public static IJsonParser getFastJson() {
+   /* public static IJsonParser getFastJson() {
         return Inner.sInstance_FastJson;
-    }
+    }*/
 }

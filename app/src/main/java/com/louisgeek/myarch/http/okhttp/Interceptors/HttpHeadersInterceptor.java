@@ -14,22 +14,25 @@ import okhttp3.Response;
  */
 
 public class HttpHeadersInterceptor implements Interceptor {
-    public HttpHeadersInterceptor(Map<String, String> headMap) {
-        this.mHeadMap = headMap;
+    private static final String TAG = "HttpHeadersInterceptor";
+
+    public HttpHeadersInterceptor(Map<String, String> commonHeaderMap) {
+        this.mCommonHeaderMap = commonHeaderMap;
     }
-    private Map<String,String> mHeadMap;
+
+    private Map<String, String> mCommonHeaderMap;
+
     @Override
     public Response intercept(Chain chain) throws IOException {
         //请求
         Request request = chain.request();
-        Request.Builder newBuilder= request.newBuilder();
+        Request.Builder newBuilder = request.newBuilder();
         //newBuilder.addHeader("Accept", "Application/JSON");
-        for (String key:mHeadMap.keySet()) {
-            String value=mHeadMap.get(key);
-            newBuilder.addHeader(key,value);
-            Log.i("zfq", "HttpHeadersInterceptor intercept: "+key+"="+value);
+        for (Map.Entry<String, String> entry : mCommonHeaderMap.entrySet()) {
+            newBuilder.addHeader(entry.getKey(), entry.getValue());
+            Log.i(TAG, "intercept: addHeader: " + entry.getKey() + "=" + entry.getValue());
         }
-        Request newRequest=newBuilder.build();
+        Request newRequest = newBuilder.build();
         //响应
         Response response = chain.proceed(newRequest);
         return response;
