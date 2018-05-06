@@ -7,12 +7,14 @@ import java.io.IOException;
 
 import okhttp3.Call;
 import okhttp3.Response;
+import okhttp3.ResponseBody;
 
 public abstract class StringCallback extends BaseCallback<String> {
     @Override
     public void onResponse(Call call, final Response response) throws IOException {
         if (response.isSuccessful()) {
-            final String result = response.toString();
+            ResponseBody responseBody = response.body();
+            final String result = responseBody == null ? "" : responseBody.string();
             this.onSuccess(result, response.code());
             //主线程
             ThreadTool.runOnUiThread(new Runnable() {

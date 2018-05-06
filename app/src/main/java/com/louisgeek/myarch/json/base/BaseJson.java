@@ -1,10 +1,10 @@
-package com.louisgeek.myarch.json;
+package com.louisgeek.myarch.json.base;
 
 public class BaseJson<T> {
     private int code;
     private String msg;
     private T data;
-    private JsonDataType jsonDataType;
+    private DataType dataType;
 
 
     public int getCode() {
@@ -31,11 +31,11 @@ public class BaseJson<T> {
         this.data = data;
     }
 
-    public JsonDataType getJsonDataType() {
-        return jsonDataType;
+    public DataType getDataType() {
+        return dataType;
     }
 
-    public void setJsonDataType(JsonDataType jsonDataType) {
-        this.jsonDataType = jsonDataType;
+    public void setDataType(DataType dataType) {
+        this.dataType = dataType;
     }
 }

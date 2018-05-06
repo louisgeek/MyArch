@@ -29,8 +29,9 @@ public class HttpHeadersInterceptor implements Interceptor {
         Request.Builder newBuilder = request.newBuilder();
         //newBuilder.addHeader("Accept", "Application/JSON");
         for (Map.Entry<String, String> entry : mCommonHeaderMap.entrySet()) {
-            newBuilder.addHeader(entry.getKey(), entry.getValue());
-            Log.i(TAG, "intercept: addHeader: " + entry.getKey() + "=" + entry.getValue());
+            // ### newBuilder.addHeader(entry.getKey(), entry.getValue());
+            newBuilder.header(entry.getKey(), entry.getValue());
+            Log.i(TAG, "intercept: add header: " + entry.getKey() + "=" + entry.getValue());
         }
         Request newRequest = newBuilder.build();
         //响应

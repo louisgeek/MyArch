@@ -1,4 +1,4 @@
-package com.louisgeek.myarch.json.gson;
+package com.louisgeek.myarch.json.gson.custom;
 
 import android.text.TextUtils;
 
@@ -10,8 +10,8 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.google.gson.JsonPrimitive;
 import com.google.gson.reflect.TypeToken;
-import com.louisgeek.myarch.json.BaseJson;
-import com.louisgeek.myarch.json.JsonDataType;
+import com.louisgeek.myarch.json.base.BaseJson;
+import com.louisgeek.myarch.json.base.DataType;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -65,7 +65,7 @@ public class GsonBaseJsonDataDeserializer implements JsonDeserializer<BaseJson> 
         if ("[]".equals(jsonStr.trim())) {
             return null;
         }
-        //转化成对象处理
+        //重新转化成对象处理
         jsonObject = mGson.fromJson(jsonStr, JsonElement.class).getAsJsonObject();
         if (jsonObject == null) {
             return null;
@@ -91,7 +91,7 @@ public class GsonBaseJsonDataDeserializer implements JsonDeserializer<BaseJson> 
         //======================== data =====================
         //e.g. { "data": null, "code": 1,"msg": "信息" }
         if (jsonObject.get("data").isJsonNull()) {
-            baseJson.setJsonDataType(JsonDataType.NULL);
+            baseJson.setDataType(DataType.NULL);
             return baseJson;
         }
         //e.g. { "data": "", "code": 1,"msg": "信息" }
@@ -100,11 +100,11 @@ public class GsonBaseJsonDataDeserializer implements JsonDeserializer<BaseJson> 
             jsonStr = jsonObject.get("data").getAsString();
             if ("".equals(jsonStr.trim())) {
                 baseJson.setData("");
-                baseJson.setJsonDataType(JsonDataType.STRING);
+                baseJson.setDataType(DataType.STRING);
                 return baseJson;
             }
             if ("null".equals(jsonStr.toLowerCase().trim())) {
-                baseJson.setJsonDataType(JsonDataType.NULL);
+                baseJson.setDataType(DataType.NULL);
                 return baseJson;
             }
         }
@@ -113,7 +113,7 @@ public class GsonBaseJsonDataDeserializer implements JsonDeserializer<BaseJson> 
             //toString
             jsonStr = jsonObject.get("data").toString();
             baseJson.setData(fromJsonArray(jsonStr, mClass));
-            baseJson.setJsonDataType(JsonDataType.ARRAY);
+            baseJson.setDataType(DataType.ARRAY);
             return baseJson;
         }
         //e.g.  { "data": {"uid":"u123"}, "code": 1,"msg": "信息" }
@@ -121,7 +121,7 @@ public class GsonBaseJsonDataDeserializer implements JsonDeserializer<BaseJson> 
             //toString
             jsonStr = jsonObject.get("data").toString();
             baseJson.setData(fromJsonObject(jsonStr, mClass));
-            baseJson.setJsonDataType(JsonDataType.OBJECT);
+            baseJson.setDataType(DataType.OBJECT);
             return baseJson;
         }
         return baseJson;

@@ -9,4 +9,13 @@ public class NewsBean {
     public long newsID;
     public String title;
     public String content;
+
+    @Override
+    public String toString() {
+        return "NewsBean{" +
+                "newsID=" + newsID +
+                ", title='" + title + '\'' +
+                ", content='" + content + '\'' +
+                '}';
+    }
 }

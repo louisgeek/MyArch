@@ -13,12 +13,14 @@ import java.lang.reflect.Type;
 
 import okhttp3.Call;
 import okhttp3.Response;
+import okhttp3.ResponseBody;
 
 public abstract class GsonCallback<T> extends BaseCallback<T> {
     @Override
     public void onResponse(Call call, final Response response) throws IOException {
         if (response.isSuccessful()) {
-            String json = response.toString();
+            ResponseBody responseBody = response.body();
+            String json = responseBody == null ? "" : responseBody.string();
             //支持解析一个类的类型，不支持List<T> 的类型
             Type type = GenericTool.getFirstGenericType(getClass());
             //支持解析 List<T> 的类型

@@ -1,26 +1,27 @@
 package com.louisgeek.myarch.json.gson;
 
 import com.google.gson.Gson;
-import com.louisgeek.myarch.json.BaseJson;
+import com.google.gson.GsonBuilder;
+import com.louisgeek.myarch.json.base.BaseJson;
 import com.louisgeek.myarch.json.IBaseJsonParser;
+import com.louisgeek.myarch.json.gson.custom.GsonBaseJsonDataDeserializer;
 
 import java.lang.reflect.Type;
-@Deprecated
+
 public class GsonBaseJsonParser implements IBaseJsonParser {
-    private MyGson mMyGson = new MyGson();
 
     @Override
     public String toJson(Object src) {
-        return mMyGson.toJson(src);
+        return new Gson().toJson(src);
     }
 
     @Override
-    public <T> BaseJson fromJson(String json, Class<T> tClass) {
-        return mMyGson.fromJson(json, tClass);
-    }
-
-    @Override
-    public BaseJson fromJson(String json, Type typeOfT) {
-        return mMyGson.fromJson(json, typeOfT);
+    public <T> BaseJson fromJson(String json, Class<T> typeOfT) {
+        Gson myGson = new GsonBuilder()
+                .registerTypeAdapter(BaseJson.class, new GsonBaseJsonDataDeserializer(typeOfT))
+//                .enableComplexMapKeySerialization()
+                .serializeNulls()
+                .create();
+        return myGson.fromJson(json, BaseJson.class);
     }
 }

@@ -52,10 +52,14 @@ public class OkHttpManager {
             return cookies != null ? cookies : new ArrayList<Cookie>();
         }
     };
+    /**
+     * 全局 相关 Map 里面的信息都是通过拦截器写入，所以任何时候的更新都会马上生效
+     */
     private Map<String, String> mCommonHeaderMap = new LinkedHashMap<>();
     private Map<String, String> mCommonParamsMap = new LinkedHashMap<>();
 
     private OkHttpManager() {
+
         //log
         HttpLoggingInterceptor httpLoggingInterceptor =
                 new HttpLoggingInterceptor(new HttpLoggingInterceptor.Logger() {

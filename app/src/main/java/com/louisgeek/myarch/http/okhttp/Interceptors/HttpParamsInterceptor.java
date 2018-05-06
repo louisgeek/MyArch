@@ -32,8 +32,7 @@ public class HttpParamsInterceptor implements Interceptor {
             FormBody.Builder paramBuilder = new FormBody.Builder();
             for (Map.Entry<String, String> entry : mCommonParamsMap.entrySet()) {
                 paramBuilder.add(entry.getKey(), entry.getValue());
-                Log.i(TAG, "intercept: addParam: " + entry.getKey() + "=" + entry.getValue());
-
+                Log.i(TAG, "intercept: add param: " + entry.getKey() + "=" + entry.getValue());
             }
             FormBody paramsBody = paramBuilder.build();
             newBuilder.post(paramsBody);
